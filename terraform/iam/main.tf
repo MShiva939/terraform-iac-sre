@@ -17,6 +17,12 @@ resource "aws_iam_role_policy_attachment" "ec2_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+
+resource "aws_iam_role_policy_attachment" "ec2_attach-2" {
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+}
+
 resource "aws_iam_role" "codebuild_role" {
   name = "devops-codebuild-role"
   assume_role_policy = jsonencode({
