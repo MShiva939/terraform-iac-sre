@@ -13,14 +13,15 @@ resource "aws_launch_template" "app_template" {
   
   user_data = base64encode(<<-EOF
               #!/bin/bash
-              yum update -y
-              yum install -y ruby wget
+              sudo yum update -y
+              sudo yum install ruby wget -y
               cd /home/ec2-user
-              wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+              wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install
               chmod +x ./install
-              ./install auto
-              systemctl start codedeploy-agent
-              systemctl enable codedeploy-agent
+              sudo ./install auto
+              sudo systemctl start codedeploy-agent
+              sudo systemctl enable codedeploy-agent
+              sudo systemctl status codedeploy-agent
               EOF
   )
 
